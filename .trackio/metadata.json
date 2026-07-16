@@ -1,0 +1,20 @@
+{
+  "space_id": "DineshAI/J0y3sNbo9G",
+  "emoji": "🎯",
+  "created_at": "2026-07-16T16:48:29+00:00",
+  "last_page": "methods-limitations-and-provenance",
+  "local_artifacts": [
+    "isolation-forest-inductive-bias-repro/isolation-forest-cpu-reproduction:v0"
+  ],
+  "paper": {
+    "arxiv_id": "2505.12825"
+  },
+  "tags": [
+    "icml2026-repro",
+    "paper-J0y3sNbo9G"
+  ],
+  "autosync": false,
+  "private": false,
+  "local_dashboards": {},
+  "artifacts_bucket": "DineshAI/J0y3sNbo9G-artifacts"
+}

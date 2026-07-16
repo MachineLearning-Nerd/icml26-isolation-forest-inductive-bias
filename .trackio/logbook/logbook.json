@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "title": "Repro - Isolation Forest Inductive Bias",
+  "emoji": "🎯",
+  "space_id": "DineshAI/J0y3sNbo9G",
+  "paper": {
+    "arxiv_id": "2505.12825"
+  },
+  "tags": [
+    "icml2026-repro",
+    "paper-J0y3sNbo9G"
+  ],
+  "updated_at": "2026-07-16T16:51:39+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Repro - Isolation Forest Inductive Bias",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "isolation-forest-inductive-bias-repro",
+        "title": "isolation-forest-inductive-bias-repro",
+        "file": "pages/isolation-forest-inductive-bias-repro/page.md",
+        "children": []
+      },
+      {
+        "slug": "00-scored-evidence-summary",
+        "title": "00 - Scored evidence summary",
+        "file": "pages/00-scored-evidence-summary/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-1-central-anomalies",
+        "title": "Claim 1 - Central anomalies",
+        "file": "pages/claim-1-central-anomalies/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2-density-and-endpoints",
+        "title": "Claim 2 - Density and endpoints",
+        "file": "pages/claim-2-density-and-endpoints/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3-random-walk-expected-depth",
+        "title": "Claim 3 - Random-walk expected depth",
+        "file": "pages/claim-3-random-walk-expected-depth/page.md",
+        "children": []
+      },
+      {
+        "slug": "methods-limitations-and-provenance",
+        "title": "Methods, limitations, and provenance",
+        "file": "pages/methods-limitations-and-provenance/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 2278,
+  "revision": "1784220699577734010"
+}

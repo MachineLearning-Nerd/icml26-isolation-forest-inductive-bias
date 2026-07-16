@@ -1,0 +1,18 @@
+{
+  "claim_1": "verified",
+  "claim_2": "verified",
+  "claim_3": "verified",
+  "iforest_threshold_slope": 0.4563347243775667,
+  "knn_threshold_slope": -1.3212742927114429e-17,
+  "iforest_threshold_parameter_cv": 0.0,
+  "knn_threshold_parameter_cv": 0.4682895715468248,
+  "iforest_boundary_coefficient": 0.5419686362494787,
+  "iforest_incremental_r2": 0.292810707422291,
+  "knn_boundary_coefficient": 0.00744325974765736,
+  "knn_incremental_r2": 5.522872207264218e-05,
+  "rows": 5520,
+  "depth_correlation": 0.9998673437962312,
+  "depth_mean_abs_error": 0.02560384353599414,
+  "depth_max_relative_error": 0.020225757049130596,
+  "trees_total": 180000
+}
