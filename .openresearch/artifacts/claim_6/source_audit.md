@@ -48,7 +48,7 @@ Metadata for all 1,639 dataset IDs was fetched from the official
 `/api/v1/json/data/{did}` endpoint. `current_dataset_metadata.csv` records the
 dataset name, version, target, upload date, dimensions, sample size, dataset
 MD5, and the SHA-256 of each metadata response. The CSV SHA-256 is
-`e6f817a5502dacc33b56fe3a277c47da9a237c224c4f83c31741aab107b56ff5`.
+`66a9346a6d95f0d42fec180033a3713fda9dc59cc1149d45bab143e85f1c7a4e`.
 
 The current catalog has a metadata sum of 1,199,438 total features and
 1,143,087 numeric features. Restricting currently active datasets by upload
