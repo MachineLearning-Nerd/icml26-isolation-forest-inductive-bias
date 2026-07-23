@@ -1,0 +1,93 @@
+{
+  "all_assumptions_valid": true,
+  "claim": 4,
+  "constraint_family_valid": true,
+  "constraint_limit": "n0=n1^2 and k=floor(n1^1.5), hence k/n1 is asymptotic to sqrt(n1) -> infinity and k/n0 is asymptotic to 1/sqrt(n1) -> 0",
+  "extrema_check": "all anomaly depths; both normal endpoints, midpoint, and 17 normal quantiles for iForest; all anomaly scores and both normal endpoints plus midpoint for k-NN",
+  "iforest_fit": {
+    "ci95": {
+      "kappa": [
+        0.7854371794950662,
+        1.0431585649826542
+      ],
+      "n1": [
+        2.1665902987266437,
+        2.429143487516206
+      ]
+    },
+    "exponents": {
+      "kappa": 0.9232664408621887,
+      "n1": 2.2818462925179617
+    },
+    "log_r2": 0.9980205043433994,
+    "predictors": [
+      "n1",
+      "kappa"
+    ]
+  },
+  "iforest_ratio_range": [
+    0.21170881374916917,
+    0.4379591841989168
+  ],
+  "invalid_constraint_controls_failed": true,
+  "kappa_values": [
+    6.0,
+    10.0,
+    12.0,
+    18.0,
+    20.0,
+    24.0,
+    34.0,
+    36.0,
+    40.0,
+    66.0,
+    68.0,
+    72.0,
+    132.0,
+    136.0,
+    264.0
+  ],
+  "knn_fit": {
+    "ci95": {
+      "delta": [
+        0.9164711551650958,
+        1.0006313117870227
+      ],
+      "k": [
+        0.6822233278253836,
+        0.7592726154227979
+      ]
+    },
+    "exponents": {
+      "delta": 0.9562595028471019,
+      "k": 0.7219748995017908
+    },
+    "log_r2": 0.9995343756067787,
+    "predictors": [
+      "k",
+      "delta"
+    ]
+  },
+  "knn_ratio_range": [
+    0.12365126593385868,
+    0.4389610389610539
+  ],
+  "n0_values": [
+    25,
+    81,
+    289,
+    1089,
+    4225
+  ],
+  "n1_values": [
+    5,
+    9,
+    17,
+    33,
+    65
+  ],
+  "route": "canonical asymptotic family",
+  "rows": 15,
+  "source_deviation": "Appendix E defines U_mg from anomaly spacings and L_mg from normal spacings, unlike Definition 4.1's within-dataset U/L. This route follows the theorem text: both clusters separately have minimum gap 1 and maximum gap kappa (difference delta).",
+  "verdict": "BLOCKED"
+}

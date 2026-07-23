@@ -11,6 +11,7 @@ def test_claim_2_has_rigorous_terminal_verdict():assert s()["claim_2"] in ("veri
 def test_claim_2_evidence_package():verify_claim_2(OUT/"claim2_exact_summary.json")
 def test_claim_2_randomized_evidence():verify_claim_2_randomized(OUT/"claim2_randomized_summary.json")
 def test_claim_4_varied_evidence():verify_claim_4_varied(OUT/"claim4_varied_summary.json")
+def test_claim_4_scaling_route_remains_honestly_blocked():assert s()["claim_4_asymptotic"]["verdict"]=="BLOCKED"
 def test_central_threshold_scaling():assert .35<s()["iforest_threshold_slope"]<.6 and abs(s()["knn_threshold_slope"])<.02
 def test_parameter_adaptability():assert s()["iforest_threshold_parameter_cv"]==0 and s()["knn_threshold_parameter_cv"]>.4
 def test_boundary_dependence_is_larger_for_iforest():

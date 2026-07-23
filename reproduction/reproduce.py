@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from claim2_exact import run_claim2_exact
 from claim2_randomized import run_claim2_randomized
 from claim4_varied import run_claim4_varied
+from claim4_asymptotic import run_claim4_asymptotic
 
 
 def expected_depth(x):
@@ -116,6 +117,7 @@ def run(out):
     c2_exact=run_claim2_exact(out)
     c2_randomized=run_claim2_randomized(out)
     c4_varied=run_claim4_varied(out)
+    c4_asymptotic=run_claim4_asymptotic(out)
     base=c1[c1.parameter==5]
     fi=base[base.method=="iforest"].sort_values("n0");fk=base[base.method=="knn"].sort_values("n0")
     slope_i=np.polyfit(np.log(fi.n0),np.log(fi.threshold),1)[0]
@@ -131,7 +133,7 @@ def run(out):
       **c2s,"depth_correlation":corr,"depth_mean_abs_error":float(np.mean(np.abs(c3.empirical-c3.theory))),
       "depth_max_relative_error":float(rel.max()),"trees_total":int(c3.groupby(["n","distribution","seed"]).trees.first().sum()),
       "claim_2_exact":c2_exact,"claim_2_randomized":c2_randomized,
-      "claim_4_varied":c4_varied}
+      "claim_4_varied":c4_varied,"claim_4_asymptotic":c4_asymptotic}
     (out/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
     fig,ax=plt.subplots(1,3,figsize=(13,3.8))
     ax[0].loglog(fi.n0,fi.threshold,"o-",label="iForest");ax[0].loglog(fk.n0,fk.threshold,"o-",label="kNN k=5");ax[0].set(xlabel="normal points",ylabel="central gap threshold",title="Central-anomaly sensitivity");ax[0].legend()

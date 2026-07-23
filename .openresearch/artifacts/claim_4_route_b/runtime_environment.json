@@ -1,0 +1,9 @@
+{
+  "command": "python reproduction/reproduce.py --output outputs && python -m pytest -q reproduction/test_reproduction.py",
+  "git_sha": "56d5f8ebdea099b11367354c9999974099707e30",
+  "logical_cpu_count": 8,
+  "machine": "arm64",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "runtime_seconds_claim_4_route_b": 0.5119629169930704
+}

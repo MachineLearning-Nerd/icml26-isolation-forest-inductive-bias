@@ -1,0 +1,6 @@
+{
+  "failed_as_intended": true,
+  "mutation": "remove the infinite-separation contradiction",
+  "stderr": "no infinite-separation contradiction",
+  "verifier_exit_code": 1
+}

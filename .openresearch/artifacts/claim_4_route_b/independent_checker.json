@@ -1,0 +1,7 @@
+{
+  "implementation": "independent scalar Theorem 3.5 limit",
+  "maximum_absolute_margin_difference": 3.552713678800501e-15,
+  "mismatches": 0,
+  "passed": true,
+  "rows_recomputed": 20
+}
