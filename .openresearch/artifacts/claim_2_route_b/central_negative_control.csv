@@ -1,0 +1,6 @@
+n0,geometry,left_normal_points,right_normal_points,marginal_endpoint,paper_scale
+20,central,10,10,False,4.47213595499958
+40,central,20,20,False,6.324555320336759
+80,central,40,40,False,8.94427190999916
+160,central,80,80,False,12.649110640673518
+320,central,160,160,False,17.88854381999832

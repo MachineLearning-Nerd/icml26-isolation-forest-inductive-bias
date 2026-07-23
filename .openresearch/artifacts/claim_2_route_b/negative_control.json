@@ -1,0 +1,6 @@
+{
+  "failed_as_intended": true,
+  "mutation": "replace marginal geometry with central control and destroy exact agreement",
+  "stderr": "random forests do not reproduce exact thresholds; central negative control substituted for marginal geometry",
+  "verifier_exit_code": 1
+}

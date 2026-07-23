@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from claim2_exact import run_claim2_exact
+from claim2_randomized import run_claim2_randomized
 
 
 def expected_depth(x):
@@ -112,6 +113,7 @@ def run(out):
     c2,c2s=claim2_sweep();c2.to_csv(out/"boundary_density_rows.csv",index=False)
     c3=claim3_sweep();c3.to_csv(out/"tree_depth_validation.csv",index=False)
     c2_exact=run_claim2_exact(out)
+    c2_randomized=run_claim2_randomized(out)
     base=c1[c1.parameter==5]
     fi=base[base.method=="iforest"].sort_values("n0");fk=base[base.method=="knn"].sort_values("n0")
     slope_i=np.polyfit(np.log(fi.n0),np.log(fi.threshold),1)[0]
@@ -119,12 +121,13 @@ def run(out):
     knn_param=c1[c1.n0==160].query("method=='knn'").threshold
     corr=float(c3[["theory","empirical"]].corr().iloc[0,1])
     rel=np.abs(c3.empirical-c3.theory)/c3.theory
-    summary={"claim_1":"verified","claim_2":c2_exact["verdict"].lower(),"claim_3":"verified",
+    claim2_verdict="falsified" if c2_exact["verdict"]=="FALSIFIED" and c2_randomized["verdict"]=="FALSIFIED" else "blocked"
+    summary={"claim_1":"verified","claim_2":claim2_verdict,"claim_3":"verified",
       "iforest_threshold_slope":float(slope_i),"knn_threshold_slope":float(slope_k),
       "iforest_threshold_parameter_cv":0.0,"knn_threshold_parameter_cv":float(knn_param.std(ddof=0)/knn_param.mean()),
       **c2s,"depth_correlation":corr,"depth_mean_abs_error":float(np.mean(np.abs(c3.empirical-c3.theory))),
       "depth_max_relative_error":float(rel.max()),"trees_total":int(c3.groupby(["n","distribution","seed"]).trees.first().sum()),
-      "claim_2_exact":c2_exact}
+      "claim_2_exact":c2_exact,"claim_2_randomized":c2_randomized}
     (out/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
     fig,ax=plt.subplots(1,3,figsize=(13,3.8))
     ax[0].loglog(fi.n0,fi.threshold,"o-",label="iForest");ax[0].loglog(fk.n0,fk.threshold,"o-",label="kNN k=5");ax[0].set(xlabel="normal points",ylabel="central gap threshold",title="Central-anomaly sensitivity");ax[0].legend()

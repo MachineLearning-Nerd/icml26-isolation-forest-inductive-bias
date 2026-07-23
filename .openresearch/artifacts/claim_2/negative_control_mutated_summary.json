@@ -1,0 +1,62 @@
+{
+  "all_assumptions_valid": false,
+  "assumption_4_2_min_margin": 0.12701665379258298,
+  "central_negative_control_distinct": true,
+  "central_negative_control_rows": 6,
+  "claim": 2,
+  "deterministic_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "falsified_component": "Theorem 4.5's literal claim that U+(k-1)delta/2 is necessary for each admissible dataset",
+  "iforest_log_fit": {
+    "intercept": -0.2152867411850256,
+    "kappa_exponent": -0.2868192459207127,
+    "kappa_exponent_ci95": [
+      -0.43633951426362066,
+      -0.13056062398604618
+    ],
+    "u_exponent": 0.9999999999999998,
+    "u_exponent_ci95": [
+      0.9999999999999992,
+      1.0000000000000002
+    ]
+  },
+  "iforest_sufficiency_violations": 1,
+  "iforest_threshold_to_u_kappa_ci95": [
+    0.05363826715558263,
+    0.07707509445556406
+  ],
+  "iforest_threshold_to_u_kappa_mean": 0.06481905974269317,
+  "interpretation": "literal per-dataset quantifiers in Theorems 4.3-4.5",
+  "knn_literal_necessity_counterexamples_at_90pct_boundary": 480,
+  "knn_log_fit": {
+    "intercept": -4.694768396963925,
+    "kappa_exponent": -0.5471933348437295,
+    "kappa_exponent_ci95": [
+      -1.9669680347032588,
+      0.9308452078965831
+    ],
+    "u_exponent": 1.0000000000000009,
+    "u_exponent_ci95": [
+      0.999999999999997,
+      0.9999999999999998
+    ]
+  },
+  "knn_sufficiency_violations": 0,
+  "knn_threshold_to_formula_ci95": [
+    0.2695861145367019,
+    0.3171576694066825
+  ],
+  "knn_threshold_to_formula_mean": 0.29302402690770124,
+  "limitation": "The U*kappa and U+(k-1)delta/2 expressions are supported as uniform sufficient bounds. Direct per-dataset thresholds are smaller; this route treats the theorem's unqualified 'necessary' wording literally.",
+  "normal_configurations": 128,
+  "rows": 640,
+  "verdict": "FALSIFIED"
+}

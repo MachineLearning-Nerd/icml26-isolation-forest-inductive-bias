@@ -1,0 +1,35 @@
+{
+  "all_assumptions_valid": true,
+  "central_negative_control_distinct": false,
+  "claim": 2,
+  "empirical_exact_normalized_mae": 0.030341690027179218,
+  "empirical_exact_threshold_correlation": 0.0,
+  "empirical_log_fit": {
+    "kappa": -0.32782185241195827,
+    "u": 0.9999999999999996
+  },
+  "empirical_to_exact_ci95": [
+    0.9688800418333674,
+    1.0539593621977599
+  ],
+  "empirical_to_exact_mean": 1.0121538332435087,
+  "empirical_to_u_kappa_ci95": [
+    0.04326544867621528,
+    0.08491346571180558
+  ],
+  "empirical_to_u_kappa_mean": 0.06266276041666667,
+  "forest_rows": 36,
+  "forest_seeds": [
+    53000,
+    53001,
+    53002,
+    53003
+  ],
+  "knn_literal_necessity_counterexamples_at_90pct_boundary": 144,
+  "knn_rows": 144,
+  "limitation": "Finite forests estimate expected-depth thresholds with 1,600 trees per bisection point; the exact Theorem 3.5 threshold is retained beside every empirical value.",
+  "route": "randomized iTree threshold replication",
+  "total_tree_evaluations": 518400,
+  "trees_per_threshold_evaluation": 1600,
+  "verdict": "FALSIFIED"
+}

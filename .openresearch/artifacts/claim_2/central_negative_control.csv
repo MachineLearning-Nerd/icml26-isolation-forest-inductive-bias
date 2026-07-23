@@ -1,0 +1,7 @@
+n0,geometry,predicted_scale,not_marginal_endpoint
+20,central,4.47213595499958,True
+40,central,6.324555320336759,True
+80,central,8.94427190999916,True
+160,central,12.649110640673518,True
+320,central,17.88854381999832,True
+640,central,25.298221281347036,True

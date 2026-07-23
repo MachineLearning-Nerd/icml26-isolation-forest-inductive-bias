@@ -1,0 +1,15 @@
+{
+  "command": "python reproduction/reproduce.py --output outputs && python -m pytest -q reproduction/test_reproduction.py",
+  "forest_seeds": [
+    53000,
+    53001,
+    53002,
+    53003
+  ],
+  "git_sha": "fb97205e0823fb1f71ae322553b4401941d9c5f7",
+  "logical_cpu_count": 8,
+  "machine": "arm64",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "runtime_seconds_claim_2_route_b": 109.13759670796571
+}

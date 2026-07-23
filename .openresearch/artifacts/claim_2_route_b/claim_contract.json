@@ -1,0 +1,13 @@
+{
+  "claim": 2,
+  "route": "randomized iTree thresholds",
+  "source_sha256": "e716edebd1c4b9ee6eb33a2f996d6232decafbc753ee9eb2fcdfadf280d74cac",
+  "geometry": "left marginal single anomaly",
+  "required_assumptions": [
+    "unique sorted one-dimensional observations",
+    "normal density factor kappa=U/L",
+    "kappa>=sqrt(n+3)",
+    "uniform random split value as in Algorithm 1"
+  ],
+  "terminal_verdicts": ["VERIFIED", "FALSIFIED", "BLOCKED"]
+}

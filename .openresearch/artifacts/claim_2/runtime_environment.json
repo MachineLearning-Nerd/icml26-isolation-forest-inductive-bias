@@ -1,0 +1,19 @@
+{
+  "command": "python reproduction/reproduce.py --output outputs && python -m pytest -q reproduction/test_reproduction.py",
+  "git_sha": "ae73beaebc1bfa106d83aca89d5ca705b174d240",
+  "logical_cpu_count": 8,
+  "machine": "arm64",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "runtime_seconds_claim_2": 18.682407917047385,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
+}

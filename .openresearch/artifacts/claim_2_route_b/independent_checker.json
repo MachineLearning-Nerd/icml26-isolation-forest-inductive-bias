@@ -1,0 +1,83 @@
+{
+  "bisection_steps": 9,
+  "implementation": "independent uniform-split simulator",
+  "independent_exact_normalized_mae": 0.04501367411999227,
+  "independent_exact_threshold_correlation": 0.9935581852217722,
+  "passed": true,
+  "rows_checked": 12,
+  "threshold_rows": [
+    {
+      "exact_threshold": 0.0937623829473738,
+      "independent_threshold": 0.09765625,
+      "kappa": 4.0,
+      "seed": 0
+    },
+    {
+      "exact_threshold": 0.8899345865916316,
+      "independent_threshold": 0.78125,
+      "kappa": 4.0,
+      "seed": 1
+    },
+    {
+      "exact_threshold": 0.3703196271187222,
+      "independent_threshold": 0.419921875,
+      "kappa": 4.0,
+      "seed": 2
+    },
+    {
+      "exact_threshold": 0.5434270691997839,
+      "independent_threshold": 0.546875,
+      "kappa": 4.0,
+      "seed": 3
+    },
+    {
+      "exact_threshold": 0.1046197229762718,
+      "independent_threshold": 0.1171875,
+      "kappa": 8.0,
+      "seed": 0
+    },
+    {
+      "exact_threshold": 0.850757567706594,
+      "independent_threshold": 0.7421875,
+      "kappa": 8.0,
+      "seed": 1
+    },
+    {
+      "exact_threshold": 0.2220331205578107,
+      "independent_threshold": 0.2734375,
+      "kappa": 8.0,
+      "seed": 2
+    },
+    {
+      "exact_threshold": 0.3790312342616623,
+      "independent_threshold": 0.390625,
+      "kappa": 8.0,
+      "seed": 3
+    },
+    {
+      "exact_threshold": 0.1195793472561463,
+      "independent_threshold": 0.15625,
+      "kappa": 16.0,
+      "seed": 0
+    },
+    {
+      "exact_threshold": 0.8128242709653452,
+      "independent_threshold": 0.7421875,
+      "kappa": 16.0,
+      "seed": 1
+    },
+    {
+      "exact_threshold": 0.1300477714757877,
+      "independent_threshold": 0.1953125,
+      "kappa": 16.0,
+      "seed": 2
+    },
+    {
+      "exact_threshold": 0.2556101850301049,
+      "independent_threshold": 0.2734375,
+      "kappa": 16.0,
+      "seed": 3
+    }
+  ],
+  "trees_per_bisection_point": 1600
+}

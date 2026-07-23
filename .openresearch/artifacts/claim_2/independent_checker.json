@@ -1,0 +1,9 @@
+{
+  "assumption_violations": 0,
+  "implementation": "independent scalar loops; no imports from claim2_exact",
+  "knn_literal_necessity_counterexamples_at_90pct_boundary": 480,
+  "mismatches": 0,
+  "passed": true,
+  "rows_recomputed": 640,
+  "sufficiency_violations": 0
+}

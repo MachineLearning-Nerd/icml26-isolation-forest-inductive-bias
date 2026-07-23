@@ -1,0 +1,7 @@
+{
+  "failed_as_intended": true,
+  "mutation": "invalidate Assumption 4.2 and add a sufficiency violation",
+  "stderr": "theorem assumptions are not all valid; iForest U*kappa sufficiency has violations",
+  "stdout": "",
+  "verifier_exit_code": 1
+}
