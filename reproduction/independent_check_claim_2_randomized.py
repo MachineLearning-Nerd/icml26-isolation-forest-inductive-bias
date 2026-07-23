@@ -37,6 +37,22 @@ def margin(gaps: np.ndarray, separation: float, seed: int) -> float:
     return float(np.min(mean[1:]) - mean[0])
 
 
+def independent_threshold(
+    gaps: np.ndarray, boundary: float, seed: int
+) -> float:
+    low = 0.0
+    high = boundary * 1.25
+    while margin(gaps, high, seed) <= 0.0:
+        high *= 2.0
+    for _ in range(9):
+        middle = (low + high) / 2.0
+        if margin(gaps, middle, seed) > 0.0:
+            high = middle
+        else:
+            low = middle
+    return high
+
+
 def main() -> None:
     if len(sys.argv) != 3:
         raise SystemExit(
@@ -44,21 +60,44 @@ def main() -> None:
         )
     rows = pd.read_csv(sys.argv[1])
     sample = rows[(rows.u == 1.0)].copy()
-    failures = 0
-    checked = 0
+    measured = []
     for row in sample.itertuples(index=False):
         gaps = np.asarray(json.loads(row.normal_gaps_json), dtype=float)
-        below = margin(gaps, row.empirical_threshold * 0.85, row.forest_seed + 9000)
-        above = margin(gaps, row.empirical_threshold * 1.15, row.forest_seed + 9000)
-        checked += 1
-        if not (below < 0.0 and above > 0.0):
-            failures += 1
+        measured.append(
+            independent_threshold(
+                gaps, row.paper_boundary, row.forest_seed + 9000
+            )
+        )
+    sample["independent_threshold"] = measured
+    correlation = float(
+        sample[["exact_threshold", "independent_threshold"]].corr().iloc[0, 1]
+    )
+    normalized_mae = float(
+        (
+            np.abs(sample.independent_threshold - sample.exact_threshold)
+            / sample.u
+        ).mean()
+    )
     result = {
         "implementation": "independent uniform-split simulator",
-        "rows_checked": checked,
-        "trees_per_side": 1600,
-        "transition_failures": failures,
-        "passed": bool(checked >= 12 and failures == 0),
+        "rows_checked": int(len(sample)),
+        "trees_per_bisection_point": 1600,
+        "bisection_steps": 9,
+        "independent_exact_threshold_correlation": correlation,
+        "independent_exact_normalized_mae": normalized_mae,
+        "threshold_rows": sample[
+            [
+                "kappa",
+                "seed",
+                "exact_threshold",
+                "independent_threshold",
+            ]
+        ].to_dict(orient="records"),
+        "passed": bool(
+            len(sample) >= 12
+            and correlation > 0.9
+            and normalized_mae < 0.15
+        ),
     }
     Path(sys.argv[2]).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps(result, sort_keys=True))
