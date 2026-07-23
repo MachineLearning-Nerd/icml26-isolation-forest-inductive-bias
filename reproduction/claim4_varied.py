@@ -95,8 +95,12 @@ def direct_threshold(
     )
     while margin(high) <= 0.0:
         high *= 2.0
-        if high > predicted_scale * 1024.0:
-            raise RuntimeError("failed to bracket varied-cluster threshold")
+        if high > predicted_scale * 1.0e12:
+            raise RuntimeError(
+                "failed to bracket varied-cluster threshold: "
+                f"method={method}, n1={n1}, n0={n0}, kappa={kappa}, "
+                f"seed={seed}, k={k}, high={high}"
+            )
     for _ in range(30):
         middle = (low + high) / 2.0
         if margin(middle) > 0.0:
@@ -200,6 +204,12 @@ def run_claim4_varied(output_dir: Path) -> dict[str, object]:
                 threshold = direct_threshold(
                     n1, n0, kappa, seed, "iforest", 1, iforest_scale
                 )
+                print(
+                    "CLAIM_4_ROUTE_B_PROGRESS "
+                    f"method=iforest n1={n1} kappa={kappa} seed={seed} "
+                    f"threshold={threshold:.9g}",
+                    flush=True,
+                )
                 rows.append(
                     {
                         "method": "iforest",
@@ -239,6 +249,12 @@ def run_claim4_varied(output_dir: Path) -> dict[str, object]:
                     knn_scale = k * delta
                     threshold = direct_threshold(
                         n1, n0, kappa, seed, "knn", k, knn_scale
+                    )
+                    print(
+                        "CLAIM_4_ROUTE_B_PROGRESS "
+                        f"method=knn n1={n1} kappa={kappa} seed={seed} "
+                        f"k={k} threshold={threshold:.9g}",
+                        flush=True,
                     )
                     rows.append(
                         {
