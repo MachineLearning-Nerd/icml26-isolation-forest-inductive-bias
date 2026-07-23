@@ -1,0 +1,15 @@
+{
+  "claim": 4,
+  "theorems": ["4.8", "4.9"],
+  "source_sha256": "e716edebd1c4b9ee6eb33a2f996d6232decafbc753ee9eb2fcdfadf280d74cac",
+  "geometry": "one-dimensional left marginal cluster of odd size n1",
+  "iforest_detection": "maximum anomaly expected depth is below minimum normal expected depth",
+  "knn_detection": "minimum anomaly k-NN mean distance is above maximum normal score",
+  "within_cluster_gaps": "minimum 1 and maximum kappa in both clusters",
+  "asymptotic_family": "n0=n1^2,k=floor(n1^1.5)",
+  "constraint_limit": "k/n1 is asymptotic to sqrt(n1) and k/n0 is asymptotic to 1/sqrt(n1)",
+  "predictions": {
+    "iforest": "Theta(n1^2*kappa)",
+    "knn": "Theta(k*delta)"
+  }
+}
