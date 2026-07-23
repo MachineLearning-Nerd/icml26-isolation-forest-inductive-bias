@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "blocked_not_promoted": true,
+    "catalog_hash_matches": true,
+    "catalog_rows_match": true,
+    "feature_total_matches": true,
+    "historical_inputs_absent": true,
+    "id_sets_match": true,
+    "metadata_hash_matches": true,
+    "metadata_rows_match": true,
+    "numeric_total_matches": true,
+    "paper_arithmetic_matches": true,
+    "symbolic_total_matches": true
+  },
+  "implementation": "independent scalar JSON/CSV parser; no imports from Claim 6 code",
+  "passed": true
+}

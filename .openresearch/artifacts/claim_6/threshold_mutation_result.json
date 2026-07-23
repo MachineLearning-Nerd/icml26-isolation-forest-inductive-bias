@@ -1,0 +1,6 @@
+{
+  "count_changed": true,
+  "mutated_threshold_pass_count": 1,
+  "normal_threshold_pass_count": 2,
+  "scope": "Unit-level mutation control for the threshold/counting path only. It is deliberately excluded from evidence for the OpenML census."
+}

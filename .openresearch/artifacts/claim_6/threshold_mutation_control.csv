@@ -1,0 +1,4 @@
+fixture_dimension,n,kappa,paper_threshold,paper_threshold_pass,mutated_threshold,mutated_threshold_pass,scope
+wide_endpoint_gap,5,7.0,2.8284271247461903,True,5.656854249492381,True,control-only; not OpenML claim evidence
+uniform_spacing,5,1.0,2.8284271247461903,False,5.656854249492381,False,control-only; not OpenML claim evidence
+moderate_ratio,5,4.0,2.8284271247461903,True,5.656854249492381,False,control-only; not OpenML claim evidence

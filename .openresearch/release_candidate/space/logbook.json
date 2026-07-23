@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "title": "Repro - Isolation Forest Inductive Bias",
+  "emoji": "🎯",
+  "space_id": "DineshAI/J0y3sNbo9G",
+  "paper": {
+    "arxiv_id": "2505.12825"
+  },
+  "tags": [
+    "icml2026-repro",
+    "paper-J0y3sNbo9G"
+  ],
+  "updated_at": "2026-07-23T12:00:00+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Repro - Isolation Forest Inductive Bias",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "01-current-six-claim-release-audit",
+        "title": "01 - Current six-claim release audit",
+        "file": "pages/01-current-six-claim-release-audit/page.md",
+        "children": []
+      },
+      {
+        "slug": "isolation-forest-inductive-bias-repro",
+        "title": "isolation-forest-inductive-bias-repro",
+        "file": "pages/isolation-forest-inductive-bias-repro/page.md",
+        "children": []
+      },
+      {
+        "slug": "00-scored-evidence-summary",
+        "title": "00 - Scored evidence summary",
+        "file": "pages/00-scored-evidence-summary/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-1-central-anomalies",
+        "title": "Claim 1 - Central anomalies",
+        "file": "pages/claim-1-central-anomalies/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2-density-and-endpoints",
+        "title": "Claim 2 - Density and endpoints",
+        "file": "pages/claim-2-density-and-endpoints/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2-marginal-single-exact",
+        "title": "Claim 2 - Exact marginal single-anomaly audit",
+        "file": "pages/claim-2-marginal-single-exact/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3-random-walk-expected-depth",
+        "title": "Claim 3 - Random-walk expected depth",
+        "file": "pages/claim-3-random-walk-expected-depth/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-4-marginal-clustered",
+        "title": "Claim 4 - Marginal clustered anomalies",
+        "file": "pages/claim-4-marginal-clustered/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-concentration",
+        "title": "Claim 5 - Concentration with tree count",
+        "file": "pages/claim-5-concentration/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-6-openml-audit",
+        "title": "Claim 6 - OpenML protocol audit",
+        "file": "pages/claim-6-openml-audit/page.md",
+        "children": []
+      },
+      {
+        "slug": "methods-limitations-and-provenance",
+        "title": "Methods, limitations, and provenance",
+        "file": "pages/methods-limitations-and-provenance/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 2278,
+  "revision": "1784220699577734010"
+}

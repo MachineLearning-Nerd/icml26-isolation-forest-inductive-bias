@@ -1,0 +1,15 @@
+{
+  "filter": {
+    "field": "space_id",
+    "operator": "==",
+    "value": "DineshAI/J0y3sNbo9G"
+  },
+  "filter_warning": "The record was selected by exact space_id; orid alone was not used.",
+  "retrieved_date": "2026-07-23",
+  "judged_revision": "260bbe2fb64833c38a8acc22ab01b8d67a19d928",
+  "verified_claims": 2,
+  "inconclusive_claims": 4,
+  "claims_total": 6,
+  "baseline_points": 4,
+  "maximum_points": 12
+}

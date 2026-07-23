@@ -1,0 +1,12 @@
+[
+  {
+    "NumberOfFeatures": 1199204,
+    "cutoff": "2025-05-19T23:59:59",
+    "datasets": 1614
+  },
+  {
+    "NumberOfNumericFeatures": 1142914,
+    "cutoff": "2025-05-19T23:59:59",
+    "datasets": 1614
+  }
+]

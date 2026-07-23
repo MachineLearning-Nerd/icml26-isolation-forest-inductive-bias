@@ -1,0 +1,8 @@
+{
+  "actual_exit_code": 1,
+  "expected_exit_code": "nonzero",
+  "failed_as_intended": true,
+  "reason": "The positive Claim 6 verifier must reject BLOCKED evidence and cannot be satisfied by source arithmetic or a current-catalog proxy.",
+  "stderr": "claim has no VERIFIED/FALSIFIED verdict; exact historical OpenML manifest is absent; historical feature values are absent; historical per-dimension kappa was not recomputed",
+  "stdout": ""
+}

@@ -23,6 +23,15 @@ def test_claim_6_is_honestly_blocked():
 def test_claim_6_positive_verifier_rejects_blocked_evidence():
  x=json.loads((Path(__file__).parents[1]/".openresearch/artifacts/claim_6/verifier_expected_failure.json").read_text())
  assert x["failed_as_intended"] and x["actual_exit_code"]!=0
+def test_release_candidate_preserves_old_evidence_and_closes_gate():
+ x=s()["release_candidate_audit"]
+ assert x["old_file_set_is_subset"]
+ assert x["changed_old_files_except_logbook"]==[]
+ assert x["logbook_json_valid"] and x["logbook_references_resolve"]
+ assert x["upload_allowlist_is_text_only"] and x["upload_hashes_match"]
+ assert x["secret_scan_hits"]==[]
+ assert not x["release_gate_met"]
+ assert not x["publication_authorized"]
 def test_central_threshold_scaling():assert .35<s()["iforest_threshold_slope"]<.6 and abs(s()["knn_threshold_slope"])<.02
 def test_parameter_adaptability():assert s()["iforest_threshold_parameter_cv"]==0 and s()["knn_threshold_parameter_cv"]>.4
 def test_boundary_dependence_is_larger_for_iforest():

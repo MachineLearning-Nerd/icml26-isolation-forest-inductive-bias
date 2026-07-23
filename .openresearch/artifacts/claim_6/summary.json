@@ -1,0 +1,81 @@
+{
+  "blocking_condition": "No released dataset manifest or snapshot and no feature-value census implementation; therefore neither VERIFIED nor FALSIFIED is supportable for the exact 930738/930751 statement.",
+  "catalog_hash_matches_frozen_contract": true,
+  "catalog_sha256": "5485ea844e865020734edc21a48fd6ff3ef6755eb90b1cd9d75e3d0adf98e208",
+  "claim": 6,
+  "closest_upload_order_prefixes": {
+    "NumberOfFeatures": {
+      "absolute_difference": 10722,
+      "cumulative": 922718,
+      "did": 42775,
+      "exact_match": false,
+      "name": "KDDCup09-Churn",
+      "upload_date": "2020-12-18T18:26:47"
+    },
+    "NumberOfNumericFeatures": {
+      "absolute_difference": 5819,
+      "cumulative": 927621,
+      "did": 42810,
+      "exact_match": false,
+      "name": "PCam",
+      "upload_date": "2021-03-08T14:01:26"
+    }
+  },
+  "current_official_openml_snapshot": {
+    "active_binary_datasets": 1639,
+    "all_number_of_classes_two": true,
+    "all_status_active": true,
+    "metadata_id_set_matches_catalog": true,
+    "number_of_features_sum": 1199438,
+    "number_of_instances_sum": 201169638,
+    "number_of_numeric_features_sum": 1143087,
+    "number_of_symbolic_features_sum": 27220
+  },
+  "current_snapshot_retrieved_utc": "2026-07-23T05:47:39Z",
+  "current_snapshot_url": "https://www.openml.org/api/v1/json/data/list/number_classes/2/limit/100000",
+  "exact_historical_manifest_present": false,
+  "full_feature_values_present": false,
+  "interpretation": "The paper's arithmetic is source-confirmed, but its historical OpenML census is not identified by the released materials. The current official catalog is a drift diagnostic, not a substitute dataset and not a falsification of the historical aggregate.",
+  "kappa_recomputed_for_historical_dimensions": false,
+  "metadata_csv_sha256": "66a9346a6d95f0d42fec180033a3713fda9dc59cc1149d45bab143e85f1c7a4e",
+  "metadata_hash_matches_frozen_contract": true,
+  "missing_protocol_fields": [
+    "historical dataset/task/version identifiers",
+    "snapshot retrieval timestamp",
+    "target-column and ignored-column rules",
+    "numeric versus symbolic feature inclusion rule",
+    "missing-value handling",
+    "repeated-value and floating-point tie handling",
+    "download-failure and unavailable-dataset exclusions",
+    "census implementation"
+  ],
+  "paper_arithmetic": {
+    "failed_valid_dimensions": 13,
+    "invalid_dimensions": 2689,
+    "valid_success_fraction": 0.9999860327842786
+  },
+  "paper_counts": {
+    "successful": 930738,
+    "total": 933440,
+    "valid": 930751
+  },
+  "paper_v1_day_cutoff_checks_on_currently_active_catalog": [
+    {
+      "NumberOfFeatures": 1199204,
+      "cutoff": "2025-05-19T23:59:59",
+      "datasets": 1614
+    },
+    {
+      "NumberOfNumericFeatures": 1142914,
+      "cutoff": "2025-05-19T23:59:59",
+      "datasets": 1614
+    }
+  ],
+  "threshold_mutation_control": {
+    "count_changed": true,
+    "mutated_threshold_pass_count": 1,
+    "normal_threshold_pass_count": 2,
+    "scope": "Unit-level mutation control for the threshold/counting path only. It is deliberately excluded from evidence for the OpenML census."
+  },
+  "verdict": "BLOCKED"
+}

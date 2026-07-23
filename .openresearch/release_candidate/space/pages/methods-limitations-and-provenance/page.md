@@ -1,3 +1,43 @@
+# Methods, limitations, and provenance
+
+
+---
+<!-- trackio-cell
+{"type": "markdown", "id": "cell_f2185292a1aa", "created_at": "2026-07-16T16:48:56+00:00", "title": "Clean-room fail-closed protocol"}
+-->
+# Methods and scope
+
+No official code exists. Three separate paths are used: algebraic expected depth,
+recursive randomized trees, and k-NN distances. Tests cover exact two-point depth,
+threshold scaling, parameter dependence, boundary effects, stochastic agreement,
+tree count, and monotonic controls.
+
+The scope is the paper's one-dimensional theoretical case study. It does not claim
+the closed form extends unchanged to multidimensional or subsampled practical
+iForest. PDF SHA-256: `95df6b6b38e6c65cd16d701175e354736e2fe772496010d57ba26a158f4c1fca`.
+
+
+---
+<!-- trackio-cell
+{"type": "artifact", "id": "cell_b99ab052dfca", "created_at": "2026-07-16T16:48:57+00:00", "title": "Complete CPU reproduction bundle", "artifact": "isolation-forest-inductive-bias-repro/isolation-forest-cpu-reproduction:v0", "artifact_type": "dataset"}
+-->
+**📦 Artifact** `isolation-forest-inductive-bias-repro/isolation-forest-cpu-reproduction:v0` · dataset
+
+https://huggingface.co/buckets/DineshAI/J0y3sNbo9G-artifacts#isolation-forest-inductive-bias-repro/isolation-forest-cpu-reproduction:v0
+
+
+---
+<!-- trackio-cell
+{"type": "code", "id": "cell_f77092d6674a", "created_at": "2026-07-16T16:51:19+00:00", "title": "Run: python reproduce.py (exit 0)", "command": [".venv/bin/python", "reproduction/reproduce.py", "--output", "outputs"], "exit_code": 0, "duration_s": 140.634}
+-->
+````bash
+$ .venv/bin/python reproduction/reproduce.py --output outputs
+````
+
+exit 0 · 140.6s
+
+
+````python title=reproduce.py
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse,json,time
@@ -5,13 +45,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from claim2_exact import run_claim2_exact
-from claim2_randomized import run_claim2_randomized
-from claim4_varied import run_claim4_varied
-from claim4_asymptotic import run_claim4_asymptotic
-from claim5_concentration import run_claim5_concentration
-from claim6_openml_audit import run_claim6_audit
-from verify_release_candidate import verify_release_candidate
 
 
 def expected_depth(x):
@@ -117,12 +150,6 @@ def run(out):
     c1=claim1_sweep();c1.to_csv(out/"central_thresholds.csv",index=False)
     c2,c2s=claim2_sweep();c2.to_csv(out/"boundary_density_rows.csv",index=False)
     c3=claim3_sweep();c3.to_csv(out/"tree_depth_validation.csv",index=False)
-    c2_exact=run_claim2_exact(out)
-    c2_randomized=run_claim2_randomized(out)
-    c4_varied=run_claim4_varied(out)
-    c4_asymptotic=run_claim4_asymptotic(out)
-    c5_concentration=run_claim5_concentration(out)
-    c6_audit=run_claim6_audit(out)
     base=c1[c1.parameter==5]
     fi=base[base.method=="iforest"].sort_values("n0");fk=base[base.method=="knn"].sort_values("n0")
     slope_i=np.polyfit(np.log(fi.n0),np.log(fi.threshold),1)[0]
@@ -130,23 +157,11 @@ def run(out):
     knn_param=c1[c1.n0==160].query("method=='knn'").threshold
     corr=float(c3[["theory","empirical"]].corr().iloc[0,1])
     rel=np.abs(c3.empirical-c3.theory)/c3.theory
-    claim2_verdict="falsified" if c2_exact["verdict"]=="FALSIFIED" and c2_randomized["verdict"]=="FALSIFIED" else "blocked"
-    claim4_verdict=c4_varied["verdict"].lower()
-    claim5_verdict=c5_concentration["verdict"].lower()
-    claim6_verdict=c6_audit["verdict"].lower()
-    summary={"claim_1":"verified","claim_2":claim2_verdict,"claim_3":"verified","claim_4":claim4_verdict,"claim_5":claim5_verdict,"claim_6":claim6_verdict,
+    summary={"claim_1":"verified","claim_2":"verified","claim_3":"verified",
       "iforest_threshold_slope":float(slope_i),"knn_threshold_slope":float(slope_k),
       "iforest_threshold_parameter_cv":0.0,"knn_threshold_parameter_cv":float(knn_param.std(ddof=0)/knn_param.mean()),
       **c2s,"depth_correlation":corr,"depth_mean_abs_error":float(np.mean(np.abs(c3.empirical-c3.theory))),
-      "depth_max_relative_error":float(rel.max()),"trees_total":int(c3.groupby(["n","distribution","seed"]).trees.first().sum()),
-      "claim_2_exact":c2_exact,"claim_2_randomized":c2_randomized,
-      "claim_4_varied":c4_varied,"claim_4_asymptotic":c4_asymptotic,
-      "claim_5_concentration":c5_concentration,
-      "claim_6_openml_audit":c6_audit}
-    claim_statuses={f"claim_{i}":summary[f"claim_{i}"] for i in range(1,7)}
-    release_audit=verify_release_candidate(claim_statuses)
-    summary["release_candidate_audit"]=release_audit
-    (out/"release_candidate_audit.json").write_text(json.dumps(release_audit,indent=2)+"\n")
+      "depth_max_relative_error":float(rel.max()),"trees_total":int(c3.groupby(["n","distribution","seed"]).trees.first().sum())}
     (out/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
     fig,ax=plt.subplots(1,3,figsize=(13,3.8))
     ax[0].loglog(fi.n0,fi.threshold,"o-",label="iForest");ax[0].loglog(fk.n0,fk.threshold,"o-",label="kNN k=5");ax[0].set(xlabel="normal points",ylabel="central gap threshold",title="Central-anomaly sensitivity");ax[0].legend()
@@ -157,3 +172,97 @@ def run(out):
 
 if __name__=="__main__":
  p=argparse.ArgumentParser();p.add_argument("--output",type=Path,default=Path("outputs"));a=p.parse_args();t=time.perf_counter();run(a.output);print(f"runtime_seconds={time.perf_counter()-t:.3f}")
+
+
+````
+
+
+````output
+{
+  "claim_1": "verified",
+  "claim_2": "verified",
+  "claim_3": "verified",
+  "iforest_threshold_slope": 0.4563347243775667,
+  "knn_threshold_slope": -1.3212742927114429e-17,
+  "iforest_threshold_parameter_cv": 0.0,
+  "knn_threshold_parameter_cv": 0.4682895715468248,
+  "iforest_boundary_coefficient": 0.5419686362494787,
+  "iforest_incremental_r2": 0.292810707422291,
+  "knn_boundary_coefficient": 0.00744325974765736,
+  "knn_incremental_r2": 5.522872207264218e-05,
+  "rows": 5520,
+  "depth_correlation": 0.9998673437962312,
+  "depth_mean_abs_error": 0.02560384353599414,
+  "depth_max_relative_error": 0.020225757049130596,
+  "trees_total": 180000
+}
+runtime_seconds=139.857
+
+````
+
+
+---
+<!-- trackio-cell
+{"type": "artifact", "id": "cell_9f6103a1be84", "created_at": "2026-07-16T16:51:19+00:00", "title": "Artifact: boundary_density_rows.csv", "path": "outputs/boundary_density_rows.csv", "size": 451466, "artifact_type": "dataset", "auto": true}
+-->
+**📦 Artifact** `outputs/boundary_density_rows.csv` · dataset · 0.5 MB
+
+https://huggingface.co/buckets/DineshAI/J0y3sNbo9G-artifacts#logbook-files/outputs/boundary_density_rows.csv
+
+
+---
+<!-- trackio-cell
+{"type": "artifact", "id": "cell_07c862854eaf", "created_at": "2026-07-16T16:51:19+00:00", "title": "Artifact: tree_depth_validation.csv", "path": "outputs/tree_depth_validation.csv", "size": 103217, "artifact_type": "dataset", "auto": true}
+-->
+**📦 Artifact** `outputs/tree_depth_validation.csv` · dataset · 0.1 MB
+
+https://huggingface.co/buckets/DineshAI/J0y3sNbo9G-artifacts#logbook-files/outputs/tree_depth_validation.csv
+
+
+---
+<!-- trackio-cell
+{"type": "artifact", "id": "cell_e254bd1cd353", "created_at": "2026-07-16T16:51:19+00:00", "title": "Artifact: central_thresholds.csv", "path": "outputs/central_thresholds.csv", "size": 1033, "artifact_type": "dataset", "auto": true}
+-->
+**📦 Artifact** `outputs/central_thresholds.csv` · dataset · 1.0 kB
+
+https://huggingface.co/buckets/DineshAI/J0y3sNbo9G-artifacts#logbook-files/outputs/central_thresholds.csv
+
+
+---
+<!-- trackio-cell
+{"type": "code", "id": "cell_7cb2aef2ab12", "created_at": "2026-07-16T16:51:32+00:00", "title": "Run: python test_reproduction.py (exit 0)", "command": [".venv/bin/python", "-m", "pytest", "-q", "reproduction/test_reproduction.py"], "exit_code": 0, "duration_s": 0.652}
+-->
+````bash
+$ .venv/bin/python -m pytest -q reproduction/test_reproduction.py
+````
+
+exit 0 · 0.7s
+
+
+````python title=test_reproduction.py
+import json
+from pathlib import Path
+import pandas as pd
+OUT=Path(__file__).parents[1]/"outputs"
+def s():return json.loads((OUT/"summary.json").read_text())
+def test_claims():assert all(s()[f"claim_{i}"]=="verified" for i in (1,2,3))
+def test_central_threshold_scaling():assert .35<s()["iforest_threshold_slope"]<.6 and abs(s()["knn_threshold_slope"])<.02
+def test_parameter_adaptability():assert s()["iforest_threshold_parameter_cv"]==0 and s()["knn_threshold_parameter_cv"]>.4
+def test_boundary_dependence_is_larger_for_iforest():
+ x=s();assert x["iforest_incremental_r2"]>20*x["knn_incremental_r2"]
+def test_boundary_coefficient():assert s()["iforest_boundary_coefficient"]>.2
+def test_random_trees_match_formula():assert s()["depth_correlation"]>.999 and s()["depth_max_relative_error"]<.04
+def test_actual_tree_scale():assert s()["trees_total"]==180000
+def test_thresholds_increase_only_for_iforest():
+ d=pd.read_csv(OUT/"central_thresholds.csv");f=d[d.parameter==5]
+ assert f.query("method=='iforest'").threshold.is_monotonic_increasing
+ assert f.query("method=='knn'").threshold.nunique()==1
+
+````
+
+
+````output
+........                                                                 [100%]
+8 passed in 0.27s
+
+````
