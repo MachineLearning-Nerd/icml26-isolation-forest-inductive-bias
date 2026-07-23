@@ -2,7 +2,7 @@
 
 For 36 admissible combinations of `U`, `kappa`, spacing seed, and forest seed,
 the route measures the marginal separation at which the empirical mean depth
-over 800 randomized iTrees becomes strictly smaller than every normal mean
+over 1,600 randomized iTrees becomes strictly smaller than every normal mean
 depth. Nine bisection steps are paired with the exact Theorem 3.5 threshold.
 
 An independent simulator uses uniform numeric split values rather than

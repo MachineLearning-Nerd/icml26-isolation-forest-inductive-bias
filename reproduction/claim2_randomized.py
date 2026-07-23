@@ -130,7 +130,7 @@ def run_claim2_randomized(output_dir: Path) -> dict[str, object]:
     started = time.perf_counter()
     artifact_dir = Path(".openresearch/artifacts/claim_2_route_b")
     artifact_dir.mkdir(parents=True, exist_ok=True)
-    trees = 800
+    trees = 1600
     rows = []
     knn_rows = []
     total_n = 12
@@ -285,7 +285,7 @@ def run_claim2_randomized(output_dir: Path) -> dict[str, object]:
         ),
         "central_negative_control_distinct": True,
         "limitation": (
-            "Finite forests estimate expected-depth thresholds with 800 trees "
+            "Finite forests estimate expected-depth thresholds with 1,600 trees "
             "per bisection point; the exact Theorem 3.5 threshold is retained "
             "beside every empirical value."
         ),
