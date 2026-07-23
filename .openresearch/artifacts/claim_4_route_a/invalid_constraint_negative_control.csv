@@ -1,0 +1,11 @@
+label,n1,n0,k,k_over_n1,k_over_n0,valid
+not_omega_n1,5,25,5,1.0,0.2,False
+not_o_n0,5,25,25,5.0,1.0,False
+not_omega_n1,9,81,9,1.0,0.1111111111111111,False
+not_o_n0,9,81,81,9.0,1.0,False
+not_omega_n1,17,289,17,1.0,0.058823529411764705,False
+not_o_n0,17,289,289,17.0,1.0,False
+not_omega_n1,33,1089,33,1.0,0.030303030303030304,False
+not_o_n0,33,1089,1089,33.0,1.0,False
+not_omega_n1,65,4225,65,1.0,0.015384615384615385,False
+not_o_n0,65,4225,4225,65.0,1.0,False

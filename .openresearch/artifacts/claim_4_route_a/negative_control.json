@@ -1,0 +1,6 @@
+{
+  "failed_as_intended": true,
+  "mutation": "replace asymptotic k sequence with invalid constraints",
+  "stderr": "verdict is not VERIFIED; omega(n1)<=k<=o(n0) family invalid; invalid constraint controls did not fail",
+  "verifier_exit_code": 1
+}
