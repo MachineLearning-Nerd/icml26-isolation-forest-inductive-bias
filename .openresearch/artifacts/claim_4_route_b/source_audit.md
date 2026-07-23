@@ -17,4 +17,7 @@ condition in both clusters. It calls `Theta(k*delta)` sufficient and necessary.
 Definition 4.1 makes `kappa=U/L` and `delta=U-L`. Appendix E instead combines
 the maximum anomaly spacing `U_mg` with the minimum normal spacing `L_mg`.
 This route implements the theorem and Definition 4.1 literally in each
-cluster and retains the proof-level mismatch as a limitation.
+cluster. It tests the universal sufficiency claim by constructing a sequence
+where the inter-cluster separation can tend to infinity but one normal point
+remains shallower than an anomaly. The Appendix E proof's cross-cluster
+extremization does not rule out this construction.

@@ -1,16 +1,18 @@
 # Claim 4 route B method
 
-Route B uses odd `n1={5,9,17,33}`, `n0=n1^2`, four deterministic seeds, and
-two density levels. Each cluster contains seeded log-uniform spacings with
-minimum exactly 1 and maximum exactly `kappa`, so its measured density factor
-is `kappa` and density difference is `delta=kappa-1`.
+Route B uses odd `n1={5,9,17,33,65}`, `n0=n1^2`, `kappa=100*n0`, and four
+deterministic placements of the anomaly cluster's single large gap. The
+normal cluster's first internal gap is `kappa`. Every other within-cluster gap
+is 1, so both clusters have density factor exactly `kappa` and density
+difference exactly `kappa-1`. Assumption 4.2 holds and `n1/n0=1/n1 -> 0`.
 
-The two k-NN families are `k=floor(n1^1.4)` and `k=floor(n1^1.75)`. In each
-family, `k/n1` increases and `k/n0` decreases, explicitly instantiating the
-theorem's asymptotic constraint. Invalid controls set `k=n1` and `k=n0`.
+For each configuration, exact Theorem 3.5 depths provide a failure witness at
+separations `1`, `10`, and `1000` times `n1^2*kappa`: one anomaly is at least
+as deep as the boundary normal, so not all anomalies are detected.
 
-Threshold bisection evaluates every anomaly and every normal point. iForest
-uses Theorem 3.5 directly. k-NN uses an exact vectorized merge of left and
-right one-dimensional neighbor distances. Fits use a seed-cluster bootstrap;
-strict confidence-interval gates decide the verdict. An independent scalar
-sorted-distance implementation recomputes a subset.
+The decisive check is analytic. In Theorem 3.5, as the inter-cluster gap tends
+to infinity, its contribution tends to one and opposite-cluster contributions
+tend to zero. Full-data depths converge to within-cluster depths plus one.
+The limiting witness remains strict in every family. A separate scalar
+implementation recomputes all limits. The verifier requires exact assumptions,
+all finite checks, and every limiting contradiction.

@@ -6,17 +6,19 @@ import math
 import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 
-def scalar_knn(values: np.ndarray, index: int, k: int) -> float:
-    distances = sorted(
-        abs(float(values[index] - values[j]))
-        for j in range(len(values))
-        if j != index
-    )
-    return sum(distances[:k]) / k
+def scalar_depth_from_gaps(gaps: list[float], index: int) -> float:
+    points = [0.0]
+    for gap in gaps:
+        points.append(points[-1] + gap)
+    result = 0.0
+    for j in range(1, index + 1):
+        result += gaps[j - 1] / (points[index] - points[j - 1])
+    for j in range(index + 1, len(points)):
+        result += gaps[j - 1] / (points[j] - points[index])
+    return result
 
 
 def main() -> None:
@@ -24,47 +26,38 @@ def main() -> None:
         raise SystemExit(
             "usage: independent_check_claim_4_varied.py RAW.csv OUTPUT.json"
         )
-    rows = pd.read_csv(sys.argv[1])
-    sample = rows[
-        (rows.method == "knn")
-        & (rows.n1 <= 9)
-        & (rows.seed == 0)
-    ]
+    rows = pd.read_csv(sys.argv[1]).drop_duplicates(["n1", "seed"])
     mismatches = 0
-    for row in sample.itertuples(index=False):
-        if not row.kappa >= math.sqrt(row.n0 + row.n1 + 3):
+    maximum_difference = 0.0
+    for row in rows.itertuples(index=False):
+        n1, n0, seed = int(row.n1), int(row.n0), int(row.seed)
+        if n0 != n1**2 or not math.isclose(row.kappa, 100.0 * n0):
             mismatches += 1
-        if not (row.k / row.n1 > 1.0 and row.k / row.n0 < 1.0):
+        if not row.kappa >= math.sqrt(n0 + n1 + 3):
             mismatches += 1
-        # Reconstruct the separately seeded clusters without importing route B.
-        def gaps(size: int, stream: int) -> np.ndarray:
-            rng = np.random.default_rng(74000 + 101 * int(row.seed) + stream)
-            values = np.exp(
-                rng.uniform(0.0, math.log(row.kappa), size=size - 1)
+        positions = (0, (n1 - 2) // 2, (n1 - 1) // 2, n1 - 2)
+        a_gaps = [1.0] * (n1 - 1)
+        a_gaps[positions[seed]] = row.kappa
+        b_gaps = [row.kappa] + [1.0] * (n0 - 2)
+        anomaly_limit = (
+            max(
+                scalar_depth_from_gaps(a_gaps, index)
+                for index in range(n1)
             )
-            values[0], values[1] = 1.0, row.kappa
-            return values[rng.permutation(size - 1)]
-
-        anomaly = np.r_[0.0, np.cumsum(gaps(int(row.n1), 1))]
-        normal = anomaly[-1] + row.direct_threshold + np.r_[
-            0.0, np.cumsum(gaps(int(row.n0), 2))
-        ]
-        points = np.r_[anomaly, normal]
-        anomaly_min = min(
-            scalar_knn(points, index, int(row.k))
-            for index in range(int(row.n1))
+            + 1.0
         )
-        normal_max = max(
-            scalar_knn(points, index, int(row.k))
-            for index in range(int(row.n1), len(points))
-        )
-        if anomaly_min + 1e-6 < normal_max:
+        normal_limit = scalar_depth_from_gaps(b_gaps, 0) + 1.0
+        margin = normal_limit - anomaly_limit
+        difference = abs(margin - row.infinite_failure_margin)
+        maximum_difference = max(maximum_difference, difference)
+        if difference > 1e-9 or margin >= -1e-8:
             mismatches += 1
     result = {
-        "implementation": "independent scalar sorted-distance k-NN",
-        "rows_recomputed": int(len(sample)),
+        "implementation": "independent scalar Theorem 3.5 limit",
+        "rows_recomputed": int(len(rows)),
         "mismatches": mismatches,
-        "passed": bool(len(sample) >= 8 and mismatches == 0),
+        "maximum_absolute_margin_difference": maximum_difference,
+        "passed": bool(len(rows) >= 20 and mismatches == 0),
     }
     Path(sys.argv[2]).write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n"
