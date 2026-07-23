@@ -1,0 +1,22 @@
+{
+  "claim": 2,
+  "paper": "Theoretical Investigation on Inductive Bias of Isolation Forest",
+  "source_sha256": "e716edebd1c4b9ee6eb33a2f996d6232decafbc753ee9eb2fcdfadf280d74cac",
+  "theorems": ["4.3", "4.4", "4.5"],
+  "geometry": "one-dimensional left marginal single anomaly",
+  "iforest_detection": "expected depth of x1 is strictly smaller than every normal point",
+  "knn_detection": "mean distance to the k nearest neighbors of x1 is strictly larger than every normal point",
+  "required_assumptions": [
+    "normal points x2:n are sorted and unique",
+    "U=max adjacent normal spacing",
+    "L=min adjacent normal spacing",
+    "kappa=U/L",
+    "delta=U-L",
+    "kappa>=sqrt(n+3)"
+  ],
+  "verdict_rule": {
+    "VERIFIED": "all literal implications hold and no admissible counterexample is found",
+    "FALSIFIED": "an independently reproduced counterexample satisfies every recorded assumption and contradicts a literal quantified statement",
+    "BLOCKED": "evidence is incomplete or the source quantifier cannot be resolved"
+  }
+}
