@@ -14,6 +14,15 @@ def test_claim_2_randomized_evidence():verify_claim_2_randomized(OUT/"claim2_ran
 def test_claim_4_varied_evidence():verify_claim_4_varied(OUT/"claim4_varied_summary.json")
 def test_claim_4_scaling_route_remains_honestly_blocked():assert s()["claim_4_asymptotic"]["verdict"]=="BLOCKED"
 def test_claim_5_concentration_evidence():verify_claim_5(OUT/"claim5_summary.json")
+def test_claim_6_is_honestly_blocked():
+ x=s()["claim_6_openml_audit"]
+ assert x["verdict"]=="BLOCKED"
+ assert not x["exact_historical_manifest_present"]
+ assert not x["kappa_recomputed_for_historical_dimensions"]
+ assert x["threshold_mutation_control"]["count_changed"]
+def test_claim_6_positive_verifier_rejects_blocked_evidence():
+ x=json.loads((Path(__file__).parents[1]/".openresearch/artifacts/claim_6/verifier_expected_failure.json").read_text())
+ assert x["failed_as_intended"] and x["actual_exit_code"]!=0
 def test_central_threshold_scaling():assert .35<s()["iforest_threshold_slope"]<.6 and abs(s()["knn_threshold_slope"])<.02
 def test_parameter_adaptability():assert s()["iforest_threshold_parameter_cv"]==0 and s()["knn_threshold_parameter_cv"]>.4
 def test_boundary_dependence_is_larger_for_iforest():

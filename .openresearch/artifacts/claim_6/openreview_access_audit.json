@@ -1,0 +1,28 @@
+{
+  "retrieved_date_utc": "2026-07-23",
+  "forum_id": "J0y3sNbo9G",
+  "attempts": [
+    {
+      "url": "https://api2.openreview.net/notes?id=J0y3sNbo9G",
+      "http_status": 403,
+      "result": "ChallengeRequiredError"
+    },
+    {
+      "url": "https://api2.openreview.net/notes?forum=J0y3sNbo9G",
+      "http_status": 403,
+      "result": "ChallengeRequiredError"
+    },
+    {
+      "url": "https://openreview.net/attachment?id=J0y3sNbo9G&name=supplementary_material",
+      "http_status": 403,
+      "result": "browser verification page"
+    },
+    {
+      "url": "https://openreview.net/attachment?id=J0y3sNbo9G&name=originally_submitted_supplementary_material",
+      "http_status": 403,
+      "result": "browser verification page"
+    }
+  ],
+  "interactive_browser_result": "No browser runtime was available.",
+  "interpretation": "Access failure is documented but is not the sole blocker; all complete public arXiv source versions independently omit the historical OpenML manifest and census code."
+}

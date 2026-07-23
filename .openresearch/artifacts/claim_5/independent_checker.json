@@ -1,0 +1,8 @@
+{
+  "aggregate_rows_recomputed": 108,
+  "implementation": "scalar Theorem 3.5 plus independent group MSE",
+  "mse_mismatches": 0,
+  "passed": true,
+  "theory_mismatches": 0,
+  "theory_rows_recomputed": 300
+}

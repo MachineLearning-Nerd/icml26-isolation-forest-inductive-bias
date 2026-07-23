@@ -1,0 +1,97 @@
+{
+  "aggregate_rows": 108,
+  "claim": 5,
+  "distributions": [
+    "normal",
+    "uniform",
+    "exponential"
+  ],
+  "ensembles": 18,
+  "fit": {
+    "intercept": 1.4671497926000636,
+    "log_r2": 0.9601251524666302,
+    "residual_max_abs": 1.0257546920032006,
+    "residual_mean": 4.60948152075852e-15,
+    "residual_std": 0.40061982326852347,
+    "slope": -2.2921900044027607e-17,
+    "slope_ci95": [
+      -0.01,
+      0.01
+    ]
+  },
+  "forest_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "hoeffding_alpha": 0.05,
+  "hoeffding_bound_violations": 0,
+  "mean_mse_curve": [
+    {
+      "ci95_high": 0.05927731419960914,
+      "ci95_low": 0.04092373135588979,
+      "mean_mse": 0.049807069544544384,
+      "trees": 100
+    },
+    {
+      "ci95_high": 0.019975559333718217,
+      "ci95_low": 0.013045013201480158,
+      "mean_mse": 0.016194614773861735,
+      "trees": 300
+    },
+    {
+      "ci95_high": 0.005153194256406157,
+      "ci95_low": 0.0037050242011558727,
+      "mean_mse": 0.004389845322014381,
+      "trees": 1000
+    },
+    {
+      "ci95_high": 0.0016378423767729263,
+      "ci95_low": 0.0011952415924065007,
+      "mean_mse": 0.0014130398626119654,
+      "trees": 3000
+    },
+    {
+      "ci95_high": 0.0005910475716478737,
+      "ci95_low": 0.0004274967712345305,
+      "mean_mse": 0.000504570315264671,
+      "trees": 10000
+    },
+    {
+      "ci95_high": 0.00018851350144772797,
+      "ci95_low": 0.00013299988799345765,
+      "mean_mse": 0.00016065879837171395,
+      "trees": 30000
+    }
+  ],
+  "mean_mse_strictly_decreasing": false,
+  "mse_reduction_100_to_30000": 310.0176899699355,
+  "negative_control_fit": {
+    "intercept": 1.460350986832101,
+    "log_r2": -2.220446049250313e-16,
+    "residual_max_abs": 0.49092185689625656,
+    "residual_mean": 8.635067969306773e-17,
+    "residual_std": 0.2341055061685839,
+    "slope": -2.2921900044027607e-17,
+    "slope_ci95": [
+      -1.5518937813076453e-16,
+      0.0
+    ]
+  },
+  "negative_control_is_flat": true,
+  "point_rows": 10800,
+  "proposition_3_1_scope": "Proposition 3.1 states a pointwise Hoeffding tail bound, not an MSE equality. The fitted T^-1 MSE rate is the corresponding independent Monte Carlo variance rate and is labeled derived.",
+  "total_trees_generated": 540000,
+  "tree_counts": [
+    100,
+    300,
+    1000,
+    3000,
+    10000,
+    30000
+  ],
+  "verdict": "VERIFIED"
+}

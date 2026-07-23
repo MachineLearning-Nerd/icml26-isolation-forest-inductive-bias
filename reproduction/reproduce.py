@@ -10,6 +10,7 @@ from claim2_randomized import run_claim2_randomized
 from claim4_varied import run_claim4_varied
 from claim4_asymptotic import run_claim4_asymptotic
 from claim5_concentration import run_claim5_concentration
+from claim6_openml_audit import run_claim6_audit
 
 
 def expected_depth(x):
@@ -120,6 +121,7 @@ def run(out):
     c4_varied=run_claim4_varied(out)
     c4_asymptotic=run_claim4_asymptotic(out)
     c5_concentration=run_claim5_concentration(out)
+    c6_audit=run_claim6_audit(out)
     base=c1[c1.parameter==5]
     fi=base[base.method=="iforest"].sort_values("n0");fk=base[base.method=="knn"].sort_values("n0")
     slope_i=np.polyfit(np.log(fi.n0),np.log(fi.threshold),1)[0]
@@ -130,14 +132,16 @@ def run(out):
     claim2_verdict="falsified" if c2_exact["verdict"]=="FALSIFIED" and c2_randomized["verdict"]=="FALSIFIED" else "blocked"
     claim4_verdict=c4_varied["verdict"].lower()
     claim5_verdict=c5_concentration["verdict"].lower()
-    summary={"claim_1":"verified","claim_2":claim2_verdict,"claim_3":"verified","claim_4":claim4_verdict,"claim_5":claim5_verdict,
+    claim6_verdict=c6_audit["verdict"].lower()
+    summary={"claim_1":"verified","claim_2":claim2_verdict,"claim_3":"verified","claim_4":claim4_verdict,"claim_5":claim5_verdict,"claim_6":claim6_verdict,
       "iforest_threshold_slope":float(slope_i),"knn_threshold_slope":float(slope_k),
       "iforest_threshold_parameter_cv":0.0,"knn_threshold_parameter_cv":float(knn_param.std(ddof=0)/knn_param.mean()),
       **c2s,"depth_correlation":corr,"depth_mean_abs_error":float(np.mean(np.abs(c3.empirical-c3.theory))),
       "depth_max_relative_error":float(rel.max()),"trees_total":int(c3.groupby(["n","distribution","seed"]).trees.first().sum()),
       "claim_2_exact":c2_exact,"claim_2_randomized":c2_randomized,
       "claim_4_varied":c4_varied,"claim_4_asymptotic":c4_asymptotic,
-      "claim_5_concentration":c5_concentration}
+      "claim_5_concentration":c5_concentration,
+      "claim_6_openml_audit":c6_audit}
     (out/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
     fig,ax=plt.subplots(1,3,figsize=(13,3.8))
     ax[0].loglog(fi.n0,fi.threshold,"o-",label="iForest");ax[0].loglog(fk.n0,fk.threshold,"o-",label="kNN k=5");ax[0].set(xlabel="normal points",ylabel="central gap threshold",title="Central-anomaly sensitivity");ax[0].legend()

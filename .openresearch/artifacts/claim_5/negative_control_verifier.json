@@ -1,0 +1,6 @@
+{
+  "failed_as_intended": true,
+  "mutation": "substitute perfectly correlated repeated-tree curve",
+  "stderr": "T^-1 MSE rate not supported; mean MSE does not strictly decrease",
+  "verifier_exit_code": 1
+}

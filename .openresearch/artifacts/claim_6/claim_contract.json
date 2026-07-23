@@ -1,0 +1,21 @@
+{
+  "claim": 6,
+  "claim_text": "Across OpenML benchmark datasets, 930738 of 930751 valid tested dimensions satisfy kappa >= sqrt(n+3).",
+  "source": "Section 4, Assumption 4.2, and Table 1",
+  "source_sha256": "e716edebd1c4b9ee6eb33a2f996d6232decafbc753ee9eb2fcdfadf280d74cac",
+  "published_counts": {
+    "successful": 930738,
+    "valid": 930751,
+    "total": 933440
+  },
+  "valid_definition": "No repeated values in the dimension.",
+  "kappa_definition": "Maximum adjacent sorted gap divided by minimum adjacent sorted gap.",
+  "verification_gate": "Exact historical dataset/task/version manifest plus feature values must independently reproduce every valid/invalid/success/failure classification and all three counts.",
+  "falsification_gate": "A contradiction must use the exact historical manifest and paper rules, or an identified quantified population; catalog drift alone is not a falsification.",
+  "proxy_policy": "Current metadata and synthetic controls are diagnostics only and cannot promote the claim.",
+  "allowed_verdicts": [
+    "VERIFIED",
+    "FALSIFIED",
+    "BLOCKED"
+  ]
+}

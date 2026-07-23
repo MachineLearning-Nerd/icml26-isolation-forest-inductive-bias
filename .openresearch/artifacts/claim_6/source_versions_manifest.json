@@ -1,0 +1,32 @@
+{
+  "retrieved_date_utc": "2026-07-23",
+  "user_agent_kind": "browser User-Agent",
+  "versions": [
+    {
+      "version": 1,
+      "url": "https://export.arxiv.org/e-print/2505.12825v1",
+      "sha256": "00749d4d6606d7d578abb914a37ceda9ae35bdf94a3fd084fd34f4a8ac9cac71",
+      "contains_openml_manifest": false,
+      "contains_census_code": false
+    },
+    {
+      "version": 2,
+      "url": "https://export.arxiv.org/e-print/2505.12825v2",
+      "sha256": "1dd7a485aaa3c65909af55bf2876f1edeb401eed641f6dc70e53c7598b99f3ab",
+      "contains_openml_manifest": false,
+      "contains_census_code": false
+    },
+    {
+      "version": 3,
+      "url": "https://export.arxiv.org/e-print/2505.12825v3",
+      "sha256": "48edcf271de6d13946102b589f06031e369586a77c36468e3755880efd15457f",
+      "contains_openml_manifest": false,
+      "contains_census_code": false
+    }
+  ],
+  "shared_reported_counts": {
+    "successful": 930738,
+    "valid": 930751,
+    "total": 933440
+  }
+}
