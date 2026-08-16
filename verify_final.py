@@ -70,7 +70,7 @@ def ref_branch_names() -> set[str]:
     ).splitlines()
     names = set()
     for ref in refs:
-        if ref in {"origin/HEAD", "HEAD"}:
+        if ref in {"origin", "origin/HEAD", "HEAD"}:
             continue
         if ref.startswith("origin/"):
             names.add(ref.removeprefix("origin/"))
