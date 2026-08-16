@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "Theoretical Investigation on Inductive Bias of Isolation Forest: ICML 2026 Evidence Audit"
+message: "If this repository or its evidence is useful, please cite both the paper and this independent audit."
+type: software
+authors:
+  - family-names: Zheng
+    given-names: Qin-Cheng
+  - family-names: Zhang
+    given-names: Shao-Qun
+  - family-names: Lyu
+    given-names: Shen-Huan
+  - family-names: Jiang
+    given-names: Yuan
+  - family-names: Zhou
+    given-names: Zhi-Hua
+repository-code: "https://github.com/MachineLearning-Nerd/icml26-isolation-forest-inductive-bias"
+url: "https://arxiv.org/abs/2505.12825"
+date-released: 2026-08-16
+keywords:
+  - isolation forest
+  - anomaly detection
+  - inductive bias
+  - reproducibility
+  - ICML 2026

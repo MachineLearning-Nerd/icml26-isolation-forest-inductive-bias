@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "repository": {
+    "name": "MachineLearning-Nerd/icml26-isolation-forest-inductive-bias",
+    "old_name": "icml26-repro-J0y3sNbo9G-isolation-forest",
+    "default_branch": "main",
+    "attribution": "MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>",
+    "independent_code": true,
+    "official_implementation_available": false
+  },
+  "paper": {
+    "title": "Theoretical Investigation on Inductive Bias of Isolation Forest",
+    "authors": [
+      "Qin-Cheng Zheng",
+      "Shao-Qun Zhang",
+      "Shen-Huan Lyu",
+      "Yuan Jiang",
+      "Zhi-Hua Zhou"
+    ],
+    "arxiv": "2505.12825",
+    "version": 3,
+    "pdf_sha256": "95df6b6b38e6c65cd16d701175e354736e2fe772496010d57ba26a158f4c1fca",
+    "primary_html": "https://ar5iv.labs.arxiv.org/html/2505.12825",
+    "primary_html_sha256": "e716edebd1c4b9ee6eb33a2f996d6232decafbc753ee9eb2fcdfadf280d74cac"
+  },
+  "collection_status": "VERIFIED_SCOPED_WITH_FALSIFIED_AND_BLOCKED_CLAIMS",
+  "claims": {
+    "claim_1": {
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Theorem 3.5",
+      "evidence": [
+        "outputs/tree_depth_validation.csv",
+        "outputs/summary.json",
+        "reproduction/reproduce.py",
+        "reproduction/test_reproduction.py"
+      ],
+      "metrics": {
+        "trees": 180000,
+        "configurations": 60,
+        "correlation": 0.9998673437962312,
+        "mean_absolute_error": 0.02560384353599414,
+        "max_relative_error": 0.020225757049130596
+      },
+      "limitation": "Finite numerical validation of the expected-depth formula; not a replacement for the proof."
+    },
+    "claim_2": {
+      "status": "FALSIFIED_AS_WRITTEN",
+      "paper_anchor": "Theorems 4.3-4.5",
+      "evidence": [
+        ".openresearch/artifacts/claim_2/summary.json",
+        ".openresearch/artifacts/claim_2/raw_thresholds.csv",
+        ".openresearch/artifacts/claim_2/independent_checker.json",
+        ".openresearch/artifacts/claim_2_route_b/summary.json",
+        ".openresearch/artifacts/claim_2_route_b/raw_forest_thresholds.csv",
+        ".openresearch/artifacts/claim_2_route_b/raw_knn_thresholds.csv",
+        "reproduction/claim2_exact.py",
+        "reproduction/claim2_randomized.py",
+        "reproduction/independent_check_claim_2.py",
+        "reproduction/independent_check_claim_2_randomized.py"
+      ],
+      "metrics": {
+        "exact_rows": 640,
+        "exact_knn_literal_necessity_counterexamples": 480,
+        "randomized_knn_literal_necessity_counterexamples": 144,
+        "exact_iforest_sufficiency_violations": 0,
+        "exact_knn_sufficiency_violations": 0
+      },
+      "limitation": "The falsification is scoped to the theorem's literal unqualified per-dataset necessity wording."
+    },
+    "claim_3": {
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Theorems 4.6-4.7",
+      "evidence": [
+        "outputs/central_thresholds.csv",
+        "outputs/summary.json",
+        "reproduction/reproduce.py",
+        "reproduction/test_reproduction.py"
+      ],
+      "metrics": {
+        "normal_point_range": [20, 40, 80, 160, 320, 640],
+        "iforest_log_log_slope": 0.4563347243775667,
+        "knn_log_log_slope": -1.3212742927114429e-17,
+        "iforest_parameter_cv": 0.0,
+        "knn_parameter_cv": 0.4682895715468248
+      },
+      "limitation": "Scoped to the committed symmetric central-anomaly construction."
+    },
+    "claim_4": {
+      "status": "FALSIFIED_AS_WRITTEN",
+      "paper_anchor": "Theorems 4.8-4.9",
+      "evidence": [
+        ".openresearch/artifacts/claim_4_route_b/summary.json",
+        ".openresearch/artifacts/claim_4_route_b/raw_counterexamples.csv",
+        ".openresearch/artifacts/claim_4_route_b/independent_checker.json",
+        ".openresearch/artifacts/claim_4_route_b/verifier_result.json",
+        ".openresearch/artifacts/claim_4_route_a/summary.json",
+        ".openresearch/artifacts/claim_4_route_a/verifier_result.json",
+        "reproduction/claim4_varied.py",
+        "reproduction/claim4_asymptotic.py",
+        "reproduction/independent_check_claim_4_varied.py"
+      ],
+      "metrics": {
+        "finite_checks": 60,
+        "counterexample_families": 20,
+        "infinite_limit_failures": 20,
+        "least_absolute_infinite_failure_margin": 1.9908437253913842,
+        "independent_checker_mismatches": 0
+      },
+      "limitation": "The primary asymptotic scaling route is blocked by a documented spacing-definition deviation; route B supplies the terminal counterexample."
+    },
+    "claim_5": {
+      "status": "VERIFIED_SCOPED_DERIVED_RATE",
+      "paper_anchor": "Proposition 3.1 and Section 5.1",
+      "evidence": [
+        ".openresearch/artifacts/claim_5/summary.json",
+        ".openresearch/artifacts/claim_5/aggregate_mse.csv",
+        ".openresearch/artifacts/claim_5/point_depths.csv",
+        ".openresearch/artifacts/claim_5/independent_checker.json",
+        ".openresearch/artifacts/claim_5/verifier_result.json",
+        "reproduction/claim5_concentration.py",
+        "reproduction/independent_check_claim_5.py"
+      ],
+      "metrics": {
+        "tree_counts": [100, 300, 1000, 3000, 10000, 30000],
+        "ensembles": 18,
+        "aggregate_rows": 108,
+        "point_rows": 10800,
+        "total_trees_generated": 540000,
+        "mse_slope": -0.9990070071262958,
+        "mse_slope_ci95": [-1.0448822483640756, -0.9542604619577997],
+        "hoeffding_bound_violations": 0
+      },
+      "limitation": "The T^-1 MSE behavior is reported as a derived independent Monte Carlo rate, not as an exact MSE statement of Proposition 3.1."
+    },
+    "claim_6": {
+      "status": "BLOCKED_REPRODUCTION_REQUIRED",
+      "paper_anchor": "Section 4, Assumption 4.2, Table 1",
+      "evidence": [
+        ".openresearch/artifacts/claim_6/summary.json",
+        ".openresearch/artifacts/claim_6/claim_contract.json",
+        ".openresearch/artifacts/claim_6/source_audit.md",
+        ".openresearch/artifacts/claim_6/source_versions_manifest.json",
+        ".openresearch/artifacts/claim_6/openml_binary_catalog_2026-07-23.json",
+        ".openresearch/artifacts/claim_6/current_dataset_metadata.csv",
+        ".openresearch/artifacts/claim_6/independent_checker.json",
+        ".openresearch/artifacts/claim_6/verifier_expected_failure.json",
+        "reproduction/claim6_openml_audit.py",
+        "reproduction/independent_check_claim_6.py",
+        "reproduction/verify_claim_6.py"
+      ],
+      "metrics": {
+        "paper_successful": 930738,
+        "paper_valid": 930751,
+        "paper_total": 933440,
+        "current_active_binary_datasets": 1639,
+        "current_total_feature_sum": 1199438,
+        "current_numeric_feature_sum": 1143087,
+        "historical_manifest_present": false,
+        "historical_feature_values_present": false,
+        "historical_kappa_recomputed": false
+      },
+      "limitation": "The current OpenML snapshot is a drift diagnostic only; it is not a substitute for the unidentified historical population."
+    }
+  },
+  "historical_evaluator": {
+    "space": "DineshAI/J0y3sNbo9G",
+    "judged_revision": "260bbe2fb64833c38a8acc22ab01b8d67a19d928",
+    "verified_claims": 2,
+    "inconclusive_claims": 4,
+    "claims_total": 6,
+    "baseline_points": 4,
+    "maximum_points": 12
+  },
+  "release_gate": {
+    "terminal_claims_required": true,
+    "met": false,
+    "publication_authorized": false,
+    "reason": "Claim 6 remains blocked because the historical OpenML manifest and per-dimension inputs are absent."
+  },
+  "thank_you": "Thank you to Qin-Cheng Zheng, Shao-Qun Zhang, Shen-Huan Lyu, Yuan Jiang, and Zhi-Hua Zhou for sharing the theoretical investigation that makes this independent audit possible."
+}

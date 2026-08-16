@@ -1,15 +1,140 @@
-# Isolation Forest inductive bias — ICML 2026 reproduction
+# Theoretical Investigation on Inductive Bias of Isolation Forest
 
-Independent CPU reproduction for OpenReview `J0y3sNbo9G` / arXiv `2505.12825`.
-It implements the paper's exact one-dimensional expected-depth formula, validates
-it against actual randomized trees, and tests both iForest/k-NN case-study claims.
+Independent ICML 2026 evidence audit for **Theoretical Investigation on
+Inductive Bias of Isolation Forest** by Qin-Cheng Zheng, Shao-Qun Zhang,
+Shen-Huan Lyu, Yuan Jiang, and Zhi-Hua Zhou.
 
-```bash
-.venv/bin/python reproduction/reproduce.py --output outputs
-.venv/bin/python -m pytest -q reproduction/test_reproduction.py
-```
+- Paper: arXiv 2505.12825v3
+- OpenReview submission: J0y3sNbo9G
+- Repository: https://github.com/MachineLearning-Nerd/icml26-isolation-forest-inductive-bias
+- Code status: independent reproduction; no official implementation was released
 
-The run grows 180,000 trees over 60 configurations, evaluates central-anomaly
-thresholds through 640 normal points, and fits boundary/density effects over
-5,520 independently generated probe rows. No GPU or official code is used.
+The current main branch uses a six-claim audit contract. It preserves the
+older three-claim numerical surface and the historical evaluator evidence, but
+does not silently treat that older surface as a complete reproduction of the
+paper.
+
+## Overall status
+
+The collection status is **VERIFIED_SCOPED_WITH_FALSIFIED_AND_BLOCKED_CLAIMS**:
+
+| Claim | Paper result audited | Current verdict | Evidence summary |
+|---|---|---|---|
+| 1 | Theorem 3.5 expected-depth function | VERIFIED, scoped | 180,000 simulated trees across 60 configurations; correlation 0.999867, MAE 0.025604, maximum relative error 0.020226. |
+| 2 | Theorems 4.3–4.5, marginal single anomaly | FALSIFIED as written | Exact admissible data preserve both sufficient-bound checks, but 480 direct k-NN thresholds contradict the theorem’s unqualified per-dataset necessity wording; a randomized route adds 144 counterexamples. |
+| 3 | Theorems 4.6–4.7, central single anomaly | VERIFIED, scoped | Normal-point counts 20 through 640; iForest log-log slope 0.456335 and k-NN slope approximately zero. |
+| 4 | Theorems 4.8–4.9, marginal clustered anomalies | FALSIFIED as written | An assumption-satisfying exact counterexample family defeats the universal iForest sufficiency claim, including the infinite-separation limit. |
+| 5 | Proposition 3.1 concentration | VERIFIED, derived-rate scope | Tree counts 100 through 30,000, six seeds, three distributions; MSE slope −0.999007 with 95% CI [−1.044882, −0.954260]. |
+| 6 | Section 4 OpenML dimension census | BLOCKED | The reported arithmetic is source-confirmed, but the historical dataset/version manifest, feature rules, snapshot, and per-dimension values are not released. |
+
+FALSIFIED means that the literal claim tested by this audit has an
+assumption-satisfying counterexample. It is not a judgment about the authors’
+intent or the usefulness of the surrounding theory. BLOCKED means that the
+available source does not identify enough inputs for a source-faithful verdict.
+
+The historical evaluator record is separate from this audit: space
+DineshAI/J0y3sNbo9G was judged at revision
+260bbe2fb64833c38a8acc22ab01b8d67a19d928 with 2 of 6 claims verified,
+4 inconclusive, and a recorded baseline score of 4/12. The current release
+candidate was not published to that space and does not claim a new judge score.
+
+## Reproduce the repository
+
+The main runner regenerates the numerical outputs and all claim-specific
+artifact packages. Claim 6 intentionally requires the fixed historical-input
+check and remains blocked when those inputs are absent.
+
+~~~bash
+python3 -m pip install -r requirements.txt
+python3 reproduction/reproduce.py --output outputs
+python3 -m pytest -q reproduction/test_reproduction.py
+~~~
+
+The persisted packages can be checked without rerunning the experiments:
+
+~~~bash
+python3 reproduction/verify_claim_2.py
+python3 reproduction/verify_claim_2_randomized.py
+python3 reproduction/verify_claim_4_varied.py
+python3 reproduction/verify_claim_5.py
+python3 reproduction/verify_release_candidate.py
+~~~
+
+The positive verifiers for Claim 4 route A and Claim 6 are expected to exit
+nonzero: route A is retained as a blocked scaling route, and Claim 6 is
+explicitly blocked rather than promoted from a current-catalog proxy.
+
+No GPU, cloud run, external model call, or official author code is required
+for the committed evidence. The Claim 6 source audit records the separately
+frozen OpenML diagnostic and its retrieval date.
+
+## Repository map
+
+- paper.pdf — the paper copy used for the local source audit.
+- reproduction/reproduce.py — shared expected-depth, anomaly, and artifact orchestration.
+- reproduction/claim*.py — claim-specific evidence producers.
+- reproduction/verify*.py — fail-closed claim and release verifiers.
+- outputs/ — the legacy three-claim numerical surface, regenerated by the main runner.
+- .openresearch/artifacts/ — raw CSV/JSON evidence, contracts, source audits,
+  independent checks, negative controls, and runtime records for Claims 2–6.
+- .openresearch/release_candidate/space/pages/ — the cumulative six-claim
+  release audit, including the protected older pages.
+- STATUS.md — current collection status and historical evaluator boundary.
+- claims.md — claim-by-claim paper contract and limitations.
+- CLAIM_EVIDENCE.md — claim-to-producer-to-verifier paths.
+- BRANCH_AUDIT.md — final branch meanings and legacy branch mapping.
+- SOURCE_MANIFEST.md and SOURCE_AUDIT.md — provenance and paper anchors.
+- CITATION.cff and EVIDENCE_MANIFEST.json — machine-readable attribution and
+  evidence metadata.
+
+## Branches
+
+The public branches use descriptive names. The historical OpenResearch-style
+names and their exact source tips are recorded in BRANCH_AUDIT.md.
+
+| Branch | Purpose |
+|---|---|
+| main | Canonical six-claim evidence collection and documentation. |
+| baseline/judged-4-of-12 | Frozen historical submission surface and evaluator record. |
+| audit/claim-2-falsification | Promoted Claim 2 exact and randomized evidence. |
+| audit/claim-2-exact-route | Exact marginal threshold route. |
+| experiment/claim-2-randomized-route | Randomized-tree confirmation of Claim 2. |
+| audit/claim-4-falsification | Promoted Claim 4 scaling and counterexample evidence. |
+| experiment/claim-4-asymptotic-route | Primary Claim 4 scaling route, retained as blocked. |
+| audit/claim-4-counterexample | Decisive exact Claim 4 counterexample family. |
+| experiment/claim-5-concentration | Tree-count concentration sweep. |
+| audit/claim-6-openml-protocol | OpenML protocol and historical-input audit. |
+| release/cumulative-evidence | Release-oriented view of the same cumulative evidence package. |
+
+## Citation
+
+~~~bibtex
+@article{zheng2026isolation,
+  title   = {Theoretical Investigation on Inductive Bias of Isolation Forest},
+  author  = {Zheng, Qin-Cheng and Zhang, Shao-Qun and Lyu, Shen-Huan and Jiang, Yuan and Zhou, Zhi-Hua},
+  journal = {arXiv preprint arXiv:2505.12825},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2505.12825}
+}
+~~~
+
+Please cite the paper when using its ideas or this audit. The repository’s
+software metadata is in CITATION.cff.
+
+## Thank you
+
+Thank you to Qin-Cheng Zheng, Shao-Qun Zhang, Shen-Huan Lyu, Yuan Jiang, and
+Zhi-Hua Zhou for developing and sharing this theoretical investigation. The
+paper’s explicit expected-depth formula and theorem structure make it possible
+to build a transparent, independently checkable reproduction and audit. This
+repository is an independent study of the released claims, not an official
+implementation or endorsement by the authors.
+
+## Scope and limitations
+
+This repository documents what the committed evidence establishes. It does
+not replace the paper’s proofs, infer hidden experimental protocols, or
+substitute a present-day OpenML catalog for the unidentified historical
+population. Numerical agreement is reported with its data construction,
+finite-sample, and derived-rate limitations.
 
