@@ -179,7 +179,8 @@ def main() -> None:
     identities = set(
         run("git", "log", "--all", "--format=%an <%ae>|%cn <%ce>").splitlines()
     )
-    assert identities == {EXPECTED_IDENTITY}, identities
+    expected_identity_pair = {EXPECTED_IDENTITY + "|" + EXPECTED_IDENTITY}
+    assert identities == expected_identity_pair, identities
     assert "Co-authored-by:" not in run("git", "log", "--all", "--format=%B")
 
     manifest = load_json("EVIDENCE_MANIFEST.json")
